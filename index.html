@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Elite Fitness Club</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen;
+}
+
+body{
+  background:#050505;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* MAIN LAYOUT */
+
+.container{
+  display:flex;
+  min-height:100vh;
+}
+
+/* IMAGE SIDE */
+
+.image-section{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+}
+
+.image-section img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.03);
+  filter:brightness(0.65);
+}
+
+/* CINEMATIC OVERLAY */
+
+.image-overlay{
+  position:absolute;
+  inset:0;
+  background:
+  linear-gradient(
+    to right,
+    rgba(5,5,5,0.96),
+    rgba(5,5,5,0.45)
+  );
+}
+
+/* GLOW EFFECT */
+
+.image-section::after{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:#ff3c00;
+  filter:blur(160px);
+  opacity:0.18;
+  top:-120px;
+  left:-120px;
+}
+
+/* CONTENT SIDE */
+
+.content-section{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:60px;
+  position:relative;
+}
+
+/* PREMIUM CARD */
+
+.content{
+  max-width:520px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:48px;
+  border-radius:28px;
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 10px 50px rgba(0,0,0,0.55),
+    0 0 60px rgba(255,60,0,0.08);
+}
+
+/* TOP BADGE */
+
+.badge{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(255,60,0,0.14);
+  border:1px solid rgba(255,60,0,0.2);
+  color:#ff7b54;
+  font-size:0.82rem;
+  font-weight:700;
+  margin-bottom:22px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+}
+
+/* HEADLINE */
+
+h1{
+  font-size:4rem;
+  line-height:1;
+  margin-bottom:24px;
+  font-weight:800;
+  letter-spacing:-2px;
+}
+
+.highlight{
+  color:#ff5c2b;
+}
+
+/* SUBTEXT */
+
+p{
+  color:#9ca3af;
+  font-size:1.08rem;
+  line-height:1.8;
+  margin-bottom:32px;
+}
+
+/* BENEFITS */
+
+.benefits{
+  list-style:none;
+  margin-bottom:34px;
+}
+
+.benefits li{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+  font-size:1rem;
+  color:#f3f4f6;
+}
+
+.check{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:rgba(255,92,43,0.16);
+  color:#ff5c2b;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  flex-shrink:0;
+}
+
+/* FORM */
+
+form{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+input{
+  flex:1;
+  padding:18px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:white;
+  font-size:1rem;
+  outline:none;
+  transition:0.2s ease;
+}
+
+input:focus{
+  border-color:#ff5c2b;
+  box-shadow:0 0 0 4px rgba(255,92,43,0.15);
+}
+
+input::placeholder{
+  color:#6b7280;
+}
+
+/* BUTTON */
+
+button{
+  padding:18px 24px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(
+    135deg,
+    #ff5c2b,
+    #ff2d55
+  );
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  transition:0.25s ease;
+  white-space:nowrap;
+  box-shadow:
+    0 8px 30px rgba(255,92,43,0.35);
+}
+
+button:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:
+    0 14px 40px rgba(255,92,43,0.45);
+}
+
+/* NOTE */
+
+.note{
+  font-size:0.88rem;
+  color:#6b7280;
+  margin-bottom:34px;
+}
+
+/* SOCIAL PROOF */
+
+.social-proof{
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:26px;
+}
+
+.social-proof p{
+  font-size:0.95rem;
+  margin-bottom:16px;
+  color:#9ca3af;
+}
+
+/* STATS */
+
+.stats{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  flex:1;
+  min-width:120px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.stat h3{
+  font-size:1.4rem;
+  margin-bottom:6px;
+  color:white;
+}
+
+.stat span{
+  color:#9ca3af;
+  font-size:0.88rem;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .container{
+    flex-direction:column;
+  }
+
+  .image-section{
+    height:42vh;
+  }
+
+  .content-section{
+    padding:24px;
+  }
+
+  .content{
+    padding:34px;
+  }
+
+  h1{
+    font-size:2.8rem;
+  }
+
+  form{
+    flex-direction:column;
+  }
+
+  button{
+    width:100%;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT IMAGE -->
+
+  <div class="image-section">
+
+    <img src="sm2-01.png.webp" alt="Elite Fitness Training">
+
+    <div class="image-overlay"></div>
+
+  </div>
+
+  <!-- RIGHT CONTENT -->
+
+  <div class="content-section">
+
+    <div class="content">
+
+      <div class="badge">
+        LIMITED FREE PASSES AVAILABLE
+      </div>
+
+      <h1>
+        Build Your <span class="highlight">Strongest Body</span> Ever
+      </h1>
+
+      <p>
+        Join Vancouver’s elite fitness community with world-class coaching,
+        cutting-edge equipment, personalized programs, and a gym atmosphere
+        designed to push you beyond your limits.
+      </p>
+
+      <ul class="benefits">
+
+        <li>
+          <span class="check">✓</span>
+          Personalized training programs
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Expert strength & conditioning coaches
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Premium equipment & recovery zones
+        </li>
+
+      </ul>
+
+      <!-- FORM -->
+
+      <form action="https://formspree.io/f/xyklwbye" method="POST">
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        >
+
+        <button type="submit">
+          Claim Free Pass
+        </button>
+
+      </form>
+
+      <div class="note">
+        No spam. No commitment. Get your free trial pass instantly.
+      </div>
+
+      <!-- SOCIAL PROOF -->
+
+      <div class="social-proof">
+
+        <p>Trusted by 3,000+ fitness members</p>
+
+        <div class="stats">
+
+          <div class="stat">
+            <h3>24/7</h3>
+            <span>Gym Access</span>
+          </div>
+
+          <div class="stat">
+            <h3>50+</h3>
+            <span>Weekly Classes</span>
+          </div>
+
+          <div class="stat">
+            <h3>4.9★</h3>
+            <span>Member Rating</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
