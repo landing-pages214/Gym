@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Elevate Performance</title>
+<title>AXIOM Performance</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -12,20 +12,29 @@
 <style>
 
 :root{
-  --bg:#050816;
-  --bg2:#0a0f1f;
 
-  --glass:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.08);
+  --bg:#04070d;
+  --bg2:#0a1019;
+
+  --panel:#0f1723;
+  --panel2:#121c2b;
+
+  --line:rgba(255,255,255,0.08);
 
   --text:#ffffff;
-  --muted:#98a2b3;
+  --muted:#8b98ab;
 
-  --green:#31d0aa;
-  --green2:#0ea371;
+  --green:#4fffcf;
+  --green2:#16c79a;
 
-  --shadow:0 25px 80px rgba(0,0,0,0.45);
+  --glow:rgba(79,255,207,0.16);
+
+  --shadow:
+    0 30px 80px rgba(0,0,0,0.55);
+
 }
+
+/* RESET */
 
 *{
   margin:0;
@@ -33,318 +42,419 @@
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
+
   font-family:'Inter',sans-serif;
+
   background:
-    radial-gradient(circle at top right,
-      rgba(49,208,170,0.14),
-      transparent 30%),
-    radial-gradient(circle at bottom left,
-      rgba(14,163,113,0.12),
-      transparent 35%),
     linear-gradient(
       180deg,
-      #050816 0%,
-      #070b17 100%
+      #04070d 0%,
+      #09111d 100%
     );
 
   color:var(--text);
+
   overflow-x:hidden;
+
 }
 
-/* PREMIUM AMBIENT GLOW */
+/* GRID BACKGROUND */
 
 body::before{
+
   content:"";
+
+  position:fixed;
+  inset:0;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+  background-size:70px 70px;
+
+  mask-image:
+    linear-gradient(to bottom,
+    rgba(0,0,0,0.9),
+    rgba(0,0,0,0.2));
+
+  pointer-events:none;
+
+  z-index:-3;
+
+}
+
+/* GREEN LIGHTING */
+
+body::after{
+
+  content:"";
+
   position:fixed;
 
   width:900px;
   height:900px;
 
-  background:
-    radial-gradient(circle,
-    rgba(49,208,170,0.18),
-    transparent 70%);
-
-  top:-420px;
-  right:-200px;
-
-  filter:blur(120px);
-  z-index:-2;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-
-  width:800px;
-  height:800px;
+  top:-350px;
+  right:-250px;
 
   background:
     radial-gradient(circle,
-    rgba(14,163,113,0.14),
+    rgba(79,255,207,0.16),
     transparent 70%);
 
-  bottom:-400px;
-  left:-300px;
-
   filter:blur(120px);
+
   z-index:-2;
+
 }
 
 /* NOISE */
 
 .noise{
+
   position:fixed;
   inset:0;
 
-  opacity:0.03;
-  pointer-events:none;
-  z-index:-1;
+  opacity:0.025;
 
   background-image:
     url("https://grainy-gradients.vercel.app/noise.svg");
+
+  pointer-events:none;
+
+  z-index:-1;
+
 }
 
 /* HERO */
 
 .hero{
+
   min-height:100vh;
+
   display:grid;
   grid-template-columns:1.05fr 0.95fr;
+
 }
 
-/* VISUAL */
+/* LEFT VISUAL */
 
 .visual{
+
   position:relative;
   overflow:hidden;
+
+  border-right:
+    1px solid rgba(255,255,255,0.06);
+
 }
 
 .visual img{
+
   width:100%;
   height:100%;
+
   object-fit:cover;
 
-  transform:scale(1.04);
+  transform:scale(1.05);
 
   filter:
-    brightness(0.62)
+    brightness(0.58)
     contrast(1.05)
     saturate(1.08);
+
 }
 
+/* OVERLAY */
+
 .visual::after{
+
   content:"";
+
   position:absolute;
   inset:0;
 
   background:
     linear-gradient(
       90deg,
-      rgba(5,8,22,0.02),
-      rgba(5,8,22,0.78)
+      rgba(4,7,13,0.08),
+      rgba(4,7,13,0.84)
     );
+
 }
 
-/* FLOATING METRIC */
+/* DATA BOX */
 
 .metric-card{
+
   position:absolute;
-  bottom:40px;
+
   left:40px;
+  bottom:40px;
 
-  width:320px;
+  width:340px;
 
-  padding:32px;
-
-  border-radius:28px;
-
-  backdrop-filter:blur(30px);
+  z-index:5;
 
   background:
     linear-gradient(
-      135deg,
-      rgba(255,255,255,0.09),
-      rgba(255,255,255,0.03)
+      180deg,
+      rgba(15,23,35,0.92),
+      rgba(10,16,25,0.94)
     );
 
   border:
     1px solid rgba(255,255,255,0.08);
 
+  padding:34px;
+
   box-shadow:var(--shadow);
 
-  z-index:5;
 }
 
-.metric-card h2{
-  font-size:4.5rem;
-  font-weight:900;
-  letter-spacing:-4px;
+/* TECH BORDER */
+
+.metric-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:2px;
 
   background:
     linear-gradient(
-      135deg,
+      90deg,
+      transparent,
+      var(--green),
+      transparent
+    );
+
+}
+
+.metric-card h2{
+
+  font-size:5rem;
+
+  line-height:1;
+
+  letter-spacing:-5px;
+
+  margin-bottom:14px;
+
+  background:
+    linear-gradient(
+      180deg,
       #ffffff,
-      #6ff7d2
+      #7dffe0
     );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
 }
 
 .metric-card p{
-  margin-top:10px;
-  color:#cbd5e1;
-  line-height:1.7;
-  font-size:1rem;
+
+  color:#b6c2d1;
+
+  line-height:1.8;
+
+  font-size:0.98rem;
+
 }
 
-/* CONTENT */
+/* CONTENT SIDE */
 
 .content{
+
   display:flex;
   align-items:center;
   justify-content:center;
 
   padding:90px;
+
+  position:relative;
+
+}
+
+/* SIDE LINES */
+
+.content::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:1px;
+  height:100%;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(79,255,207,0.3),
+      transparent
+    );
+
 }
 
 .content-inner{
-  max-width:650px;
+  width:100%;
+  max-width:680px;
 }
 
-/* MICRO BADGE */
+/* LABEL */
 
 .label{
+
   display:inline-flex;
+
   align-items:center;
-  gap:10px;
 
-  padding:14px 20px;
-
-  border-radius:999px;
-
-  background:
-    rgba(255,255,255,0.04);
+  padding:14px 18px;
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(79,255,207,0.22);
 
-  backdrop-filter:blur(20px);
+  background:
+    rgba(79,255,207,0.05);
+
+  color:#9dffe8;
+
+  font-size:0.76rem;
+  font-weight:800;
+
+  letter-spacing:2px;
+  text-transform:uppercase;
 
   margin-bottom:34px;
 
-  color:#8df5d7;
-
-  text-transform:uppercase;
-  letter-spacing:1.8px;
-  font-size:0.74rem;
-  font-weight:800;
 }
 
 /* HEADLINE */
 
 h1{
-  font-size:6.5rem;
-  line-height:0.92;
 
-  letter-spacing:-5px;
+  font-size:7rem;
+
+  line-height:0.9;
+
+  letter-spacing:-6px;
+
   font-weight:900;
 
-  margin-bottom:28px;
+  margin-bottom:30px;
+
 }
 
-/* PREMIUM GRADIENT */
+/* TEXT GLOW */
 
 .gradient{
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff 0%,
-      #7fffd4 100%
-    );
 
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:var(--green);
+
+  text-shadow:
+    0 0 30px rgba(79,255,207,0.22);
+
 }
 
 /* SUBTEXT */
 
 .sub{
+
   color:var(--muted);
 
-  font-size:1.15rem;
-  line-height:1.9;
+  font-size:1.12rem;
 
-  max-width:580px;
+  line-height:2;
 
-  margin-bottom:44px;
+  max-width:620px;
+
+  margin-bottom:40px;
+
 }
 
 /* CTA PANEL */
 
 .cta-box{
+
   position:relative;
-  overflow:hidden;
-
-  padding:26px;
-
-  border-radius:30px;
-
-  backdrop-filter:blur(40px);
 
   background:
     linear-gradient(
-      135deg,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.03)
+      180deg,
+      rgba(18,28,43,0.92),
+      rgba(10,16,25,0.98)
     );
 
   border:
     1px solid rgba(255,255,255,0.08);
 
+  padding:28px;
+
   box-shadow:var(--shadow);
+
+  overflow:hidden;
+
 }
 
+/* PANEL EDGE */
+
 .cta-box::before{
+
   content:"";
+
   position:absolute;
-  inset:0;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:1px;
 
   background:
     linear-gradient(
-      135deg,
-      rgba(255,255,255,0.06),
+      90deg,
+      transparent,
+      var(--green),
       transparent
     );
 
-  pointer-events:none;
 }
 
 /* FORM */
 
 form{
+
   display:flex;
   gap:14px;
+
 }
 
 input{
+
   flex:1;
 
-  padding:20px 22px;
+  height:64px;
 
-  border-radius:18px;
+  padding:0 20px;
+
+  border:none;
+
+  background:
+    rgba(255,255,255,0.03);
 
   border:
     1px solid rgba(255,255,255,0.08);
-
-  background:
-    rgba(255,255,255,0.05);
 
   color:white;
 
@@ -353,110 +463,167 @@ input{
   outline:none;
 
   transition:0.25s ease;
+
 }
 
 input:focus{
-  border-color:rgba(49,208,170,0.7);
+
+  border-color:
+    rgba(79,255,207,0.45);
 
   box-shadow:
-    0 0 0 4px rgba(49,208,170,0.14);
+    0 0 0 4px rgba(79,255,207,0.08);
+
 }
 
 input::placeholder{
-  color:#667085;
+  color:#6f7c8f;
 }
 
 /* BUTTON */
 
 button{
+
+  height:64px;
+
+  padding:0 34px;
+
   border:none;
-
-  padding:20px 30px;
-
-  border-radius:18px;
-
-  cursor:pointer;
-
-  font-size:1rem;
-  font-weight:800;
-
-  color:#04110d;
 
   background:
     linear-gradient(
-      135deg,
-      #7fffd4,
-      #31d0aa
+      180deg,
+      #67ffd9,
+      #23c89b
     );
+
+  color:#03110d;
+
+  font-weight:800;
+  font-size:0.98rem;
+
+  cursor:pointer;
 
   transition:0.3s ease;
 
-  box-shadow:
-    0 14px 40px rgba(49,208,170,0.35);
+  letter-spacing:0.3px;
+
 }
 
 button:hover{
+
   transform:
-    translateY(-2px)
-    scale(1.02);
+    translateY(-2px);
 
   box-shadow:
-    0 18px 60px rgba(49,208,170,0.45);
+    0 18px 50px rgba(79,255,207,0.22);
+
 }
 
 /* NOTE */
 
 .note{
-  margin-top:14px;
 
-  color:#8b95a7;
-  font-size:0.92rem;
+  margin-top:16px;
+
+  color:#7f8da1;
+
+  font-size:0.9rem;
+
 }
 
-/* STATS */
+/* METRICS ROW */
 
 .social{
+
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
 
   gap:18px;
 
-  margin-top:36px;
+  margin-top:34px;
+
 }
 
+/* TECH CARDS */
+
 .social-card{
-  padding:26px;
 
-  border-radius:24px;
-
-  backdrop-filter:blur(20px);
+  position:relative;
 
   background:
-    rgba(255,255,255,0.04);
+    linear-gradient(
+      180deg,
+      rgba(17,25,38,0.92),
+      rgba(10,16,25,0.98)
+    );
 
   border:
-    1px solid rgba(255,255,255,0.06);
+    1px solid rgba(255,255,255,0.08);
+
+  padding:26px;
 
   transition:0.3s ease;
+
+  overflow:hidden;
+
+}
+
+.social-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(79,255,207,0.8),
+      transparent
+    );
+
 }
 
 .social-card:hover{
-  transform:translateY(-4px);
+
+  transform:
+    translateY(-4px);
 
   border-color:
-    rgba(49,208,170,0.18);
+    rgba(79,255,207,0.2);
+
 }
 
-.social-card h3{
-  font-size:2.2rem;
-  letter-spacing:-2px;
+/* STAT NUMBERS */
 
-  margin-bottom:6px;
+.social-card h3{
+
+  font-size:2.6rem;
+
+  letter-spacing:-3px;
+
+  margin-bottom:8px;
+
+  color:white;
+
 }
 
 .social-card span{
-  color:#9aa4b2;
-  line-height:1.5;
+
+  color:#8c9aae;
+
+  line-height:1.6;
+
+  font-size:0.94rem;
+
 }
 
 /* MOBILE */
@@ -476,7 +643,7 @@ button:hover{
   }
 
   h1{
-    font-size:4.3rem;
+    font-size:4.4rem;
   }
 
   form{
@@ -492,7 +659,7 @@ button:hover{
   }
 
   .metric-card{
-    width:240px;
+    width:260px;
     left:20px;
     bottom:20px;
   }
@@ -508,44 +675,46 @@ button:hover{
 
 <section class="hero">
 
-  <!-- LEFT VISUAL -->
+  <!-- LEFT SIDE -->
 
   <div class="visual">
 
-    <img src="2024-10-15.webp" alt="Luxury Performance Facility">
+    <img src="2024-10-15.webp" alt="AXIOM Performance">
 
     <div class="metric-card">
+
       <h2>4.9★</h2>
 
       <p>
-        Trusted by entrepreneurs, athletes, and high-performing
-        professionals across Vancouver.
+        Selected by founders, athletes, executives,
+        and performance-focused professionals.
       </p>
+
     </div>
 
   </div>
 
-  <!-- RIGHT CONTENT -->
+  <!-- RIGHT SIDE -->
 
   <div class="content">
 
     <div class="content-inner">
 
       <div class="label">
-        EXCLUSIVE MEMBERSHIP ACCESS
+        PRIVATE PERFORMANCE MEMBERSHIP
       </div>
 
       <h1>
-        Build Your
+        Engineered For
         <span class="gradient">
-          Highest Level
+          Higher Standards
         </span>
       </h1>
 
       <p class="sub">
-        A luxury performance environment designed for people who value
-        longevity, aesthetics, discipline, and elite physical results —
-        without the overcrowded commercial gym experience.
+        A premium performance environment combining
+        elite training, recovery, longevity, and precision-driven
+        coaching inside a world-class facility.
       </p>
 
       <!-- CTA -->
@@ -562,29 +731,29 @@ button:hover{
           >
 
           <button type="submit">
-            Apply For VIP Access
+            Request VIP Access
           </button>
 
         </form>
 
         <div class="note">
-          Complimentary 3-day VIP pass • Limited weekly approvals
+          Complimentary 3-day performance pass • Limited onboarding availability
         </div>
 
       </div>
 
-      <!-- SOCIAL -->
+      <!-- METRICS -->
 
       <div class="social">
 
         <div class="social-card">
           <h3>24/7</h3>
-          <span>Private Member Access</span>
+          <span>Private Access Infrastructure</span>
         </div>
 
         <div class="social-card">
           <h3>50+</h3>
-          <span>Performance & Recovery Sessions Weekly</span>
+          <span>Weekly Recovery & Performance Sessions</span>
         </div>
 
         <div class="social-card">
