@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Elite Performance</title>
+<title>Elevate Performance</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -12,12 +12,19 @@
 <style>
 
 :root{
-  --bg:#050505;
+  --bg:#050816;
+  --bg2:#0a0f1f;
+
   --glass:rgba(255,255,255,0.06);
   --border:rgba(255,255,255,0.08);
+
   --text:#ffffff;
-  --muted:#9ca3af;
-  --accent:#ff6a3d;
+  --muted:#98a2b3;
+
+  --green:#31d0aa;
+  --green2:#0ea371;
+
+  --shadow:0 25px 80px rgba(0,0,0,0.45);
 }
 
 *{
@@ -26,76 +33,92 @@
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:'Inter',sans-serif;
-  background:var(--bg);
+  background:
+    radial-gradient(circle at top right,
+      rgba(49,208,170,0.14),
+      transparent 30%),
+    radial-gradient(circle at bottom left,
+      rgba(14,163,113,0.12),
+      transparent 35%),
+    linear-gradient(
+      180deg,
+      #050816 0%,
+      #070b17 100%
+    );
+
   color:var(--text);
   overflow-x:hidden;
 }
 
-/* GLOBAL GLOW */
+/* PREMIUM AMBIENT GLOW */
 
 body::before{
   content:"";
   position:fixed;
+
   width:900px;
   height:900px;
 
   background:
-  radial-gradient(circle,
-  rgba(255,100,50,0.16),
-  transparent 70%);
+    radial-gradient(circle,
+    rgba(49,208,170,0.18),
+    transparent 70%);
 
-  top:-400px;
+  top:-420px;
   right:-200px;
 
   filter:blur(120px);
-
-  z-index:-3;
+  z-index:-2;
 }
 
 body::after{
   content:"";
   position:fixed;
+
   width:800px;
   height:800px;
 
   background:
-  radial-gradient(circle,
-  rgba(255,0,100,0.08),
-  transparent 70%);
+    radial-gradient(circle,
+    rgba(14,163,113,0.14),
+    transparent 70%);
 
   bottom:-400px;
   left:-300px;
 
   filter:blur(120px);
-
-  z-index:-3;
+  z-index:-2;
 }
 
-/* NOISE TEXTURE */
+/* NOISE */
 
 .noise{
   position:fixed;
   inset:0;
-  opacity:0.035;
+
+  opacity:0.03;
   pointer-events:none;
   z-index:-1;
 
   background-image:
-  url("https://grainy-gradients.vercel.app/noise.svg");
+    url("https://grainy-gradients.vercel.app/noise.svg");
 }
 
-/* MAIN HERO */
+/* HERO */
 
 .hero{
   min-height:100vh;
   display:grid;
-  grid-template-columns:1.15fr 0.85fr;
-  position:relative;
+  grid-template-columns:1.05fr 0.95fr;
 }
 
-/* IMAGE SIDE */
+/* VISUAL */
 
 .visual{
   position:relative;
@@ -107,15 +130,13 @@ body::after{
   height:100%;
   object-fit:cover;
 
+  transform:scale(1.04);
+
   filter:
-  brightness(0.55)
-  contrast(1.05)
-  saturate(1.1);
-
-  transform:scale(1.05);
+    brightness(0.62)
+    contrast(1.05)
+    saturate(1.08);
 }
-
-/* DARK OVERLAY */
 
 .visual::after{
   content:"";
@@ -123,52 +144,64 @@ body::after{
   inset:0;
 
   background:
-  linear-gradient(
-    90deg,
-    rgba(5,5,5,0.05),
-    rgba(5,5,5,0.72)
-  );
+    linear-gradient(
+      90deg,
+      rgba(5,8,22,0.02),
+      rgba(5,8,22,0.78)
+    );
 }
 
-/* FLOATING GLASS */
+/* FLOATING METRIC */
 
 .metric-card{
   position:absolute;
-  bottom:50px;
-  left:50px;
+  bottom:40px;
+  left:40px;
 
-  width:280px;
+  width:320px;
 
-  padding:30px;
+  padding:32px;
 
-  z-index:5;
+  border-radius:28px;
 
   backdrop-filter:blur(30px);
 
   background:
-  linear-gradient(
-    135deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.03)
-  );
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.09),
+      rgba(255,255,255,0.03)
+    );
 
   border:
-  1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255,255,255,0.08);
 
-  box-shadow:
-  0 20px 60px rgba(0,0,0,0.4);
+  box-shadow:var(--shadow);
+
+  z-index:5;
 }
 
 .metric-card h2{
-  font-size:4rem;
+  font-size:4.5rem;
   font-weight:900;
-  letter-spacing:-3px;
+  letter-spacing:-4px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #6ff7d2
+    );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .metric-card p{
-  color:#d1d5db;
-  line-height:1.6;
-  margin-top:8px;
+  margin-top:10px;
+  color:#cbd5e1;
+  line-height:1.7;
+  font-size:1rem;
 }
 
 /* CONTENT */
@@ -177,59 +210,64 @@ body::after{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:80px;
-  position:relative;
+
+  padding:90px;
 }
 
 .content-inner{
-  max-width:620px;
+  max-width:650px;
 }
 
-/* MICRO LABEL */
+/* MICRO BADGE */
 
 .label{
   display:inline-flex;
   align-items:center;
   gap:10px;
 
-  padding:12px 18px;
+  padding:14px 20px;
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,0.04);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
 
   backdrop-filter:blur(20px);
 
-  background:
-  rgba(255,255,255,0.04);
-
-  border:
-  1px solid rgba(255,255,255,0.06);
-
   margin-bottom:34px;
 
-  font-size:0.76rem;
+  color:#8df5d7;
+
   text-transform:uppercase;
-  letter-spacing:1.6px;
-  color:#ff9d7d;
-  font-weight:700;
+  letter-spacing:1.8px;
+  font-size:0.74rem;
+  font-weight:800;
 }
 
 /* HEADLINE */
 
 h1{
-  font-size:6.4rem;
-  line-height:0.9;
-  font-weight:900;
+  font-size:6.5rem;
+  line-height:0.92;
+
   letter-spacing:-5px;
+  font-weight:900;
+
   margin-bottom:28px;
 }
 
-/* GRADIENT TEXT */
+/* PREMIUM GRADIENT */
 
 .gradient{
   background:
-  linear-gradient(
-    135deg,
-    #ffffff,
-    #ff7a45
-  );
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #7fffd4 100%
+    );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -239,36 +277,38 @@ h1{
 
 .sub{
   color:var(--muted);
+
   font-size:1.15rem;
   line-height:1.9;
-  max-width:560px;
-  margin-bottom:42px;
+
+  max-width:580px;
+
+  margin-bottom:44px;
 }
 
-/* CTA WRAPPER */
+/* CTA PANEL */
 
 .cta-box{
+  position:relative;
+  overflow:hidden;
+
+  padding:26px;
+
+  border-radius:30px;
 
   backdrop-filter:blur(40px);
 
   background:
-  linear-gradient(
-    135deg,
-    rgba(255,255,255,0.07),
-    rgba(255,255,255,0.03)
-  );
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.03)
+    );
 
   border:
-  1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255,255,255,0.08);
 
-  padding:24px;
-
-  box-shadow:
-  0 25px 70px rgba(0,0,0,0.45);
-
-  position:relative;
-
-  overflow:hidden;
+  box-shadow:var(--shadow);
 }
 
 .cta-box::before{
@@ -277,11 +317,11 @@ h1{
   inset:0;
 
   background:
-  linear-gradient(
-    135deg,
-    rgba(255,255,255,0.08),
-    transparent
-  );
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.06),
+      transparent
+    );
 
   pointer-events:none;
 }
@@ -296,34 +336,34 @@ form{
 input{
   flex:1;
 
-  background:
-  rgba(255,255,255,0.05);
+  padding:20px 22px;
+
+  border-radius:18px;
 
   border:
-  1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255,255,255,0.08);
 
-  padding:20px;
+  background:
+    rgba(255,255,255,0.05);
 
   color:white;
 
-  outline:none;
-
   font-size:1rem;
 
-  backdrop-filter:blur(20px);
+  outline:none;
 
   transition:0.25s ease;
 }
 
 input:focus{
-  border-color:#ff7a45;
+  border-color:rgba(49,208,170,0.7);
 
   box-shadow:
-  0 0 0 4px rgba(255,122,69,0.12);
+    0 0 0 4px rgba(49,208,170,0.14);
 }
 
 input::placeholder{
-  color:#6b7280;
+  color:#667085;
 }
 
 /* BUTTON */
@@ -331,76 +371,92 @@ input::placeholder{
 button{
   border:none;
 
-  padding:20px 28px;
+  padding:20px 30px;
 
-  background:
-  linear-gradient(
-    135deg,
-    #ff7a45,
-    #ff3d6e
-  );
-
-  color:white;
-
-  font-weight:800;
-  font-size:1rem;
+  border-radius:18px;
 
   cursor:pointer;
+
+  font-size:1rem;
+  font-weight:800;
+
+  color:#04110d;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7fffd4,
+      #31d0aa
+    );
 
   transition:0.3s ease;
 
   box-shadow:
-  0 12px 40px rgba(255,100,50,0.35);
+    0 14px 40px rgba(49,208,170,0.35);
 }
 
 button:hover{
   transform:
-  translateY(-2px)
-  scale(1.02);
+    translateY(-2px)
+    scale(1.02);
 
   box-shadow:
-  0 18px 55px rgba(255,100,50,0.45);
+    0 18px 60px rgba(49,208,170,0.45);
 }
 
-/* SMALL NOTE */
+/* NOTE */
 
 .note{
   margin-top:14px;
-  color:#737373;
-  font-size:0.9rem;
+
+  color:#8b95a7;
+  font-size:0.92rem;
 }
 
-/* SOCIAL STRIP */
+/* STATS */
 
 .social{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+
   gap:18px;
-  margin-top:38px;
+
+  margin-top:36px;
 }
 
 .social-card{
-  flex:1;
+  padding:26px;
 
-  padding:22px;
+  border-radius:24px;
 
-  backdrop-filter:blur(24px);
+  backdrop-filter:blur(20px);
 
   background:
-  rgba(255,255,255,0.04);
+    rgba(255,255,255,0.04);
 
   border:
-  1px solid rgba(255,255,255,0.06);
+    1px solid rgba(255,255,255,0.06);
+
+  transition:0.3s ease;
+}
+
+.social-card:hover{
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(49,208,170,0.18);
 }
 
 .social-card h3{
-  font-size:2rem;
+  font-size:2.2rem;
+  letter-spacing:-2px;
+
   margin-bottom:6px;
-  letter-spacing:-1px;
 }
 
 .social-card span{
-  color:#9ca3af;
-  font-size:0.92rem;
+  color:#9aa4b2;
+  line-height:1.5;
 }
 
 /* MOBILE */
@@ -412,7 +468,7 @@ button:hover{
   }
 
   .visual{
-    height:52vh;
+    height:50vh;
   }
 
   .content{
@@ -420,7 +476,7 @@ button:hover{
   }
 
   h1{
-    font-size:4.2rem;
+    font-size:4.3rem;
   }
 
   form{
@@ -432,11 +488,11 @@ button:hover{
   }
 
   .social{
-    flex-direction:column;
+    grid-template-columns:1fr;
   }
 
   .metric-card{
-    width:220px;
+    width:240px;
     left:20px;
     bottom:20px;
   }
@@ -456,13 +512,14 @@ button:hover{
 
   <div class="visual">
 
-    <img src="2024-10-15.webp" alt="Elite Performance">
+    <img src="2024-10-15.webp" alt="Luxury Performance Facility">
 
     <div class="metric-card">
       <h2>4.9★</h2>
+
       <p>
-        Trusted by high-performing athletes, entrepreneurs,
-        and elite fitness members across Vancouver.
+        Trusted by entrepreneurs, athletes, and high-performing
+        professionals across Vancouver.
       </p>
     </div>
 
@@ -475,20 +532,20 @@ button:hover{
     <div class="content-inner">
 
       <div class="label">
-        LIMITED MEMBERSHIP ACCESS
+        EXCLUSIVE MEMBERSHIP ACCESS
       </div>
 
       <h1>
-        Unlock Your
+        Build Your
         <span class="gradient">
-          Peak Physique
+          Highest Level
         </span>
       </h1>
 
       <p class="sub">
-        A luxury-level performance facility built for people
-        obsessed with transformation, longevity, aesthetics,
-        and elite-level physical performance.
+        A luxury performance environment designed for people who value
+        longevity, aesthetics, discipline, and elite physical results —
+        without the overcrowded commercial gym experience.
       </p>
 
       <!-- CTA -->
@@ -505,13 +562,13 @@ button:hover{
           >
 
           <button type="submit">
-            Claim Free Pass
+            Apply For VIP Access
           </button>
 
         </form>
 
         <div class="note">
-          Free 3-day VIP access • No commitment required
+          Complimentary 3-day VIP pass • Limited weekly approvals
         </div>
 
       </div>
@@ -522,17 +579,17 @@ button:hover{
 
         <div class="social-card">
           <h3>24/7</h3>
-          <span>Private Facility Access</span>
+          <span>Private Member Access</span>
         </div>
 
         <div class="social-card">
           <h3>50+</h3>
-          <span>Elite Weekly Classes</span>
+          <span>Performance & Recovery Sessions Weekly</span>
         </div>
 
         <div class="social-card">
           <h3>98%</h3>
-          <span>Client Retention Rate</span>
+          <span>Long-Term Client Retention</span>
         </div>
 
       </div>
