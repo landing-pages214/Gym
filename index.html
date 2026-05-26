@@ -1,193 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Elite Fitness Club</title>
+<title>Elite Performance</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+
+:root{
+  --bg:#050505;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.08);
+  --text:#ffffff;
+  --muted:#9ca3af;
+  --accent:#ff6a3d;
+}
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen;
 }
 
 body{
-  background:#050505;
-  color:white;
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
   overflow-x:hidden;
 }
 
-/* MAIN LAYOUT */
+/* GLOBAL GLOW */
 
-.container{
-  display:flex;
+body::before{
+  content:"";
+  position:fixed;
+  width:900px;
+  height:900px;
+
+  background:
+  radial-gradient(circle,
+  rgba(255,100,50,0.16),
+  transparent 70%);
+
+  top:-400px;
+  right:-200px;
+
+  filter:blur(120px);
+
+  z-index:-3;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:800px;
+  height:800px;
+
+  background:
+  radial-gradient(circle,
+  rgba(255,0,100,0.08),
+  transparent 70%);
+
+  bottom:-400px;
+  left:-300px;
+
+  filter:blur(120px);
+
+  z-index:-3;
+}
+
+/* NOISE TEXTURE */
+
+.noise{
+  position:fixed;
+  inset:0;
+  opacity:0.035;
+  pointer-events:none;
+  z-index:-1;
+
+  background-image:
+  url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* MAIN HERO */
+
+.hero{
   min-height:100vh;
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  position:relative;
 }
 
 /* IMAGE SIDE */
 
-.image-section{
-  flex:1;
+.visual{
   position:relative;
   overflow:hidden;
 }
 
-.image-section img{
+.visual img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transform:scale(1.03);
-  filter:brightness(0.65);
+
+  filter:
+  brightness(0.55)
+  contrast(1.05)
+  saturate(1.1);
+
+  transform:scale(1.05);
 }
 
-/* CINEMATIC OVERLAY */
+/* DARK OVERLAY */
 
-.image-overlay{
+.visual::after{
+  content:"";
   position:absolute;
   inset:0;
+
   background:
   linear-gradient(
-    to right,
-    rgba(5,5,5,0.96),
-    rgba(5,5,5,0.45)
+    90deg,
+    rgba(5,5,5,0.05),
+    rgba(5,5,5,0.72)
   );
 }
 
-/* GLOW EFFECT */
+/* FLOATING GLASS */
 
-.image-section::after{
-  content:"";
+.metric-card{
   position:absolute;
-  width:500px;
-  height:500px;
-  background:#ff3c00;
-  filter:blur(160px);
-  opacity:0.18;
-  top:-120px;
-  left:-120px;
+  bottom:50px;
+  left:50px;
+
+  width:280px;
+
+  padding:30px;
+
+  z-index:5;
+
+  backdrop-filter:blur(30px);
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.03)
+  );
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,0.4);
 }
 
-/* CONTENT SIDE */
+.metric-card h2{
+  font-size:4rem;
+  font-weight:900;
+  letter-spacing:-3px;
+}
 
-.content-section{
-  flex:1;
+.metric-card p{
+  color:#d1d5db;
+  line-height:1.6;
+  margin-top:8px;
+}
+
+/* CONTENT */
+
+.content{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:60px;
+  padding:80px;
   position:relative;
 }
 
-/* PREMIUM CARD */
-
-.content{
-  max-width:520px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  padding:48px;
-  border-radius:28px;
-  backdrop-filter:blur(18px);
-  box-shadow:
-    0 10px 50px rgba(0,0,0,0.55),
-    0 0 60px rgba(255,60,0,0.08);
+.content-inner{
+  max-width:620px;
 }
 
-/* TOP BADGE */
+/* MICRO LABEL */
 
-.badge{
-  display:inline-block;
-  padding:10px 16px;
-  border-radius:999px;
-  background:rgba(255,60,0,0.14);
-  border:1px solid rgba(255,60,0,0.2);
-  color:#ff7b54;
-  font-size:0.82rem;
-  font-weight:700;
-  margin-bottom:22px;
-  letter-spacing:0.5px;
+.label{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:12px 18px;
+
+  backdrop-filter:blur(20px);
+
+  background:
+  rgba(255,255,255,0.04);
+
+  border:
+  1px solid rgba(255,255,255,0.06);
+
+  margin-bottom:34px;
+
+  font-size:0.76rem;
   text-transform:uppercase;
+  letter-spacing:1.6px;
+  color:#ff9d7d;
+  font-weight:700;
 }
 
 /* HEADLINE */
 
 h1{
-  font-size:4rem;
-  line-height:1;
-  margin-bottom:24px;
-  font-weight:800;
-  letter-spacing:-2px;
+  font-size:6.4rem;
+  line-height:0.9;
+  font-weight:900;
+  letter-spacing:-5px;
+  margin-bottom:28px;
 }
 
-.highlight{
-  color:#ff5c2b;
+/* GRADIENT TEXT */
+
+.gradient{
+  background:
+  linear-gradient(
+    135deg,
+    #ffffff,
+    #ff7a45
+  );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 /* SUBTEXT */
 
-p{
-  color:#9ca3af;
-  font-size:1.08rem;
-  line-height:1.8;
-  margin-bottom:32px;
+.sub{
+  color:var(--muted);
+  font-size:1.15rem;
+  line-height:1.9;
+  max-width:560px;
+  margin-bottom:42px;
 }
 
-/* BENEFITS */
+/* CTA WRAPPER */
 
-.benefits{
-  list-style:none;
-  margin-bottom:34px;
+.cta-box{
+
+  backdrop-filter:blur(40px);
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,0.07),
+    rgba(255,255,255,0.03)
+  );
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  padding:24px;
+
+  box-shadow:
+  0 25px 70px rgba(0,0,0,0.45);
+
+  position:relative;
+
+  overflow:hidden;
 }
 
-.benefits li{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:18px;
-  font-size:1rem;
-  color:#f3f4f6;
-}
+.cta-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
 
-.check{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:rgba(255,92,43,0.16);
-  color:#ff5c2b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  flex-shrink:0;
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+
+  pointer-events:none;
 }
 
 /* FORM */
 
 form{
   display:flex;
-  gap:12px;
-  margin-bottom:16px;
+  gap:14px;
 }
 
 input{
   flex:1;
-  padding:18px;
-  border:none;
-  border-radius:14px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.08);
+
+  background:
+  rgba(255,255,255,0.05);
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  padding:20px;
+
   color:white;
-  font-size:1rem;
+
   outline:none;
-  transition:0.2s ease;
+
+  font-size:1rem;
+
+  backdrop-filter:blur(20px);
+
+  transition:0.25s ease;
 }
 
 input:focus{
-  border-color:#ff5c2b;
-  box-shadow:0 0 0 4px rgba(255,92,43,0.15);
+  border-color:#ff7a45;
+
+  box-shadow:
+  0 0 0 4px rgba(255,122,69,0.12);
 }
 
 input::placeholder{
@@ -197,100 +329,98 @@ input::placeholder{
 /* BUTTON */
 
 button{
-  padding:18px 24px;
   border:none;
-  border-radius:14px;
-  background:linear-gradient(
+
+  padding:20px 28px;
+
+  background:
+  linear-gradient(
     135deg,
-    #ff5c2b,
-    #ff2d55
+    #ff7a45,
+    #ff3d6e
   );
+
   color:white;
+
   font-weight:800;
+  font-size:1rem;
+
   cursor:pointer;
-  transition:0.25s ease;
-  white-space:nowrap;
+
+  transition:0.3s ease;
+
   box-shadow:
-    0 8px 30px rgba(255,92,43,0.35);
+  0 12px 40px rgba(255,100,50,0.35);
 }
 
 button:hover{
-  transform:translateY(-2px) scale(1.02);
+  transform:
+  translateY(-2px)
+  scale(1.02);
+
   box-shadow:
-    0 14px 40px rgba(255,92,43,0.45);
+  0 18px 55px rgba(255,100,50,0.45);
 }
 
-/* NOTE */
+/* SMALL NOTE */
 
 .note{
-  font-size:0.88rem;
-  color:#6b7280;
-  margin-bottom:34px;
+  margin-top:14px;
+  color:#737373;
+  font-size:0.9rem;
 }
 
-/* SOCIAL PROOF */
+/* SOCIAL STRIP */
 
-.social-proof{
-  border-top:1px solid rgba(255,255,255,0.08);
-  padding-top:26px;
-}
-
-.social-proof p{
-  font-size:0.95rem;
-  margin-bottom:16px;
-  color:#9ca3af;
-}
-
-/* STATS */
-
-.stats{
+.social{
   display:flex;
-  gap:14px;
-  flex-wrap:wrap;
+  gap:18px;
+  margin-top:38px;
 }
 
-.stat{
+.social-card{
   flex:1;
-  min-width:120px;
-  padding:18px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.06);
+
+  padding:22px;
+
+  backdrop-filter:blur(24px);
+
+  background:
+  rgba(255,255,255,0.04);
+
+  border:
+  1px solid rgba(255,255,255,0.06);
 }
 
-.stat h3{
-  font-size:1.4rem;
+.social-card h3{
+  font-size:2rem;
   margin-bottom:6px;
-  color:white;
+  letter-spacing:-1px;
 }
 
-.stat span{
+.social-card span{
   color:#9ca3af;
-  font-size:0.88rem;
+  font-size:0.92rem;
 }
 
 /* MOBILE */
 
-@media(max-width:900px){
+@media(max-width:980px){
 
-  .container{
-    flex-direction:column;
+  .hero{
+    grid-template-columns:1fr;
   }
 
-  .image-section{
-    height:42vh;
-  }
-
-  .content-section{
-    padding:24px;
+  .visual{
+    height:52vh;
   }
 
   .content{
-    padding:34px;
+    padding:50px 24px 90px;
   }
 
   h1{
-    font-size:2.8rem;
+    font-size:4.2rem;
   }
 
   form{
@@ -301,6 +431,16 @@ button:hover{
     width:100%;
   }
 
+  .social{
+    flex-direction:column;
+  }
+
+  .metric-card{
+    width:220px;
+    left:20px;
+    bottom:20px;
+  }
+
 }
 
 </style>
@@ -308,101 +448,91 @@ button:hover{
 
 <body>
 
-<div class="container">
+<div class="noise"></div>
 
-  <!-- LEFT IMAGE -->
+<section class="hero">
 
-  <div class="image-section">
+  <!-- LEFT VISUAL -->
 
-    <img src="2024-10-15.webp" alt="Elite Fitness Training">
+  <div class="visual">
 
-    <div class="image-overlay"></div>
+    <img src="2024-10-15.webp" alt="Elite Performance">
+
+    <div class="metric-card">
+      <h2>4.9★</h2>
+      <p>
+        Trusted by high-performing athletes, entrepreneurs,
+        and elite fitness members across Vancouver.
+      </p>
+    </div>
 
   </div>
 
   <!-- RIGHT CONTENT -->
 
-  <div class="content-section">
+  <div class="content">
 
-    <div class="content">
+    <div class="content-inner">
 
-      <div class="badge">
-        LIMITED FREE PASSES AVAILABLE
+      <div class="label">
+        LIMITED MEMBERSHIP ACCESS
       </div>
 
       <h1>
-        Build Your <span class="highlight">Strongest Body</span> Ever
+        Unlock Your
+        <span class="gradient">
+          Peak Physique
+        </span>
       </h1>
 
-      <p>
-        Join Vancouver’s elite fitness community with world-class coaching,
-        cutting-edge equipment, personalized programs, and a gym atmosphere
-        designed to push you beyond your limits.
+      <p class="sub">
+        A luxury-level performance facility built for people
+        obsessed with transformation, longevity, aesthetics,
+        and elite-level physical performance.
       </p>
 
-      <ul class="benefits">
+      <!-- CTA -->
 
-        <li>
-          <span class="check">✓</span>
-          Personalized training programs
-        </li>
+      <div class="cta-box">
 
-        <li>
-          <span class="check">✓</span>
-          Expert strength & conditioning coaches
-        </li>
+        <form action="https://formspree.io/f/xyklwbye" method="POST">
 
-        <li>
-          <span class="check">✓</span>
-          Premium equipment & recovery zones
-        </li>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          >
 
-      </ul>
+          <button type="submit">
+            Claim Free Pass
+          </button>
 
-      <!-- FORM -->
+        </form>
 
-      <form action="https://formspree.io/f/xyklwbye" method="POST">
+        <div class="note">
+          Free 3-day VIP access • No commitment required
+        </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-        >
-
-        <button type="submit">
-          Claim Free Pass
-        </button>
-
-      </form>
-
-      <div class="note">
-        No spam. No commitment. Get your free trial pass instantly.
       </div>
 
-      <!-- SOCIAL PROOF -->
+      <!-- SOCIAL -->
 
-      <div class="social-proof">
+      <div class="social">
 
-        <p>Trusted by 3,000+ fitness members</p>
+        <div class="social-card">
+          <h3>24/7</h3>
+          <span>Private Facility Access</span>
+        </div>
 
-        <div class="stats">
+        <div class="social-card">
+          <h3>50+</h3>
+          <span>Elite Weekly Classes</span>
+        </div>
 
-          <div class="stat">
-            <h3>24/7</h3>
-            <span>Gym Access</span>
-          </div>
-
-          <div class="stat">
-            <h3>50+</h3>
-            <span>Weekly Classes</span>
-          </div>
-
-          <div class="stat">
-            <h3>4.9★</h3>
-            <span>Member Rating</span>
-          </div>
-
+        <div class="social-card">
+          <h3>98%</h3>
+          <span>Client Retention Rate</span>
         </div>
 
       </div>
@@ -411,7 +541,7 @@ button:hover{
 
   </div>
 
-</div>
+</section>
 
 </body>
 </html>
